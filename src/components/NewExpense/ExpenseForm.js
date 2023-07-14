@@ -15,28 +15,52 @@ export const ExpenseForm = () => {
       setEnteredDate(value);
     }
   }
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    const expenseData = {
+      title: enteredTitle,
+      amount: enteredAmount,
+      date: new Date(enteredDate)
+    };
+
+    console.log(expenseData);
+  };
+
   return (
-    <form>
-      <div className="new-expense__controls">
-        <div className="new-expense__control">
+    <form onSubmit={submitHandler}>
+      <div className='new-expense__controls'>
+        <div className='new-expense__control'>
           <label>Title</label>
-          <input type="text" onChange={(e) => inputChangeHandler('title', e.target.value)} />
+          <input
+            type='text'
+            value={enteredTitle}
+            onChange={(e) => inputChangeHandler('title', e.target.value)}
+          />
         </div>
-        <div className="new-expense__control">
+        <div className='new-expense__control'>
           <label>Amount</label>
-          <input type="text" onChange={(e) => inputChangeHandler('amount', e.target.value)} />
+          <input
+            type='number'
+            min='0.01'
+            step='0.01'
+            value={enteredAmount}
+            onChange={(e) => inputChangeHandler('amount', e.target.value)}
+          />
         </div>
-        <div className="new-expense__control">
+        <div className='new-expense__control'>
           <label>Date</label>
           <input
-            type="date"
-            min="2010-01-01"
-            max="2023-12-31"
+            type='date'
+            min='2010-01-01'
+            max='2023-12-31'
+            value={enteredDate}
             onChange={(e) => inputChangeHandler('date', e.target.value)}
           />
         </div>
-        <div className="new-expense__actions">
-          <button type="submit">Add Expense</button>
+        <div className='new-expense__actions'>
+          <button type='submit'>Add Expense</button>
         </div>
       </div>
     </form>
